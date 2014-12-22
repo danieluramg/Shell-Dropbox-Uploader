@@ -30,7 +30,7 @@ VERBOSE=1
 PASTA=`dirname $0`; PASTA=`cd $PASTA; pwd`
 CONFIG_FILE=/etc/.dropbox_uploader
 
-#Don't edit these...
+#Don't edit these..
 API_REQUEST_TOKEN_URL="https://api.dropbox.com/1/oauth/request_token"
 API_USER_AUTH_URL="https://www2.dropbox.com/1/oauth/authorize"
 API_ACCESS_TOKEN_URL="https://api.dropbox.com/1/oauth/access_token"
@@ -87,7 +87,7 @@ usage() {
     echo -e
     echo -e "Dropbox Uploader v$VERSION"
     echo -e "Andrea Fabrizi - andrea.fabrizi@gmail.com"
-    echo -e "Adaptado para BrazilFW 2.3x e traduzido para pt-BR por\nDaniel Plácido - daniel.uramg@gmail.com\n"
+    echo -e "Adaptado para BrazilFW 2.3x e traduzido para pt-BR por\nDaniel PlÃ¡cido - daniel.uramg@gmail.com\n"
     echo -e "Uso: $0 COMANDO [PARAMETRO]..."
     echo -e "\nComandos:"
     
@@ -107,7 +107,7 @@ usage() {
 for i in $BIN_DEPS; do
     which $i > /dev/null
     if [ $? -ne 0 ]; then
-        echo -e "Erro: Arquivo de dependencia não encontrado: $i"
+        echo -e "Erro: Arquivo de dependencia nÃ£o encontrado: $i"
         remove_temp_files
         exit 1
     fi
@@ -125,7 +125,7 @@ if [ -f "$CONFIG_FILE" ]; then
     #Checking the loaded data
     if [ -z "$APPKEY" -o -z "$APPSECRET" -o -z "$OAUTH_ACCESS_TOKEN_SECRET" -o -z "$OAUTH_ACCESS_TOKEN" ]; then
         echo -ne "Erro carregando dados de $CONFIG_FILE...\n"
-        echo -ne "É recomendado que execute $0 unlink\n"
+        echo -ne "Ã‰ recomendado que execute $0 unlink\n"
         remove_temp_files
         exit 1
     fi
@@ -133,14 +133,14 @@ if [ -f "$CONFIG_FILE" ]; then
 #NEW SETUP...
 else
 
-    echo -ne "\n Esta é a primeira vez que você executa este script.\n"
+    echo -ne "\n Esta Ã© a primeira vez que vocÃª executa este script.\n"
     echo -ne " Por favor abra esta URL no seu navegador e acesse sua conta:\n\n -> $APP_CREATE_URL\n"
     echo -ne "\n Clique em \"Create an App\" e preencha o\n"
-    echo -ne " formulário com os seguintes dados:\n\n"
+    echo -ne " formulÃ¡rio com os seguintes dados:\n\n"
     echo -ne "  App name: EasyBackup$RANDOM$RANDOM\n"
-    echo -ne "  Description: O que você quiser...\n"
+    echo -ne "  Description: O que vocÃª quiser...\n"
     echo -ne "  Access level: Full Dropbox\n\n"
-    echo -ne " Clique no botão \"Create\".\n\n"
+    echo -ne " Clique no botÃ£o \"Create\".\n\n"
     
     echo -ne " Quando seu aplicativo novo for criado com sucesso, por favor insira o \n"
     echo -ne " App Key e App Secret:\n\n"
@@ -154,7 +154,7 @@ else
         echo -n " # App secret: "
         read APPSECRET
 
-        echo -ne "\n > App key é $APPKEY e App secret é $APPSECRET, está certo? [y/n]"
+        echo -ne "\n > App key Ã© $APPKEY e App secret Ã© $APPSECRET, estÃ¡ certo? [y/n]"
         read answer
         if [ "$answer" == "y" ]; then
             break;
@@ -204,7 +204,7 @@ echo 2
             echo "OAUTH_ACCESS_TOKEN:$OAUTH_ACCESS_TOKEN" >> "$CONFIG_FILE"
             echo "OAUTH_ACCESS_TOKEN_SECRET:$OAUTH_ACCESS_TOKEN_SECRET" >> "$CONFIG_FILE"
             
-            echo -ne "\n Configuração completa!\n"
+            echo -ne "\n ConfiguraÃ§Ã£o completa!\n"
             break
         else
             print " ERRO\n"
@@ -228,7 +228,7 @@ upload)
 
     #Checking FILE_SRC
     if [ ! -f "$FILE_SRC" ]; then
-        echo -e "Por favor especifique um caminho válido!"
+        echo -e "Por favor especifique um caminho vÃ¡lido!"
         remove_temp_files
         exit 1
     fi
@@ -247,7 +247,7 @@ download)
 
     #Checking FILE_SRC
     if [ -z "$FILE_SRC" ]; then
-        echo -e "Por favor especifique um caminho válido!"
+        echo -e "Por favor especifique um caminho vÃ¡lido!"
         remove_temp_files
         exit 1
     fi
@@ -269,7 +269,7 @@ delete)
 
     #Checking FILE_DST
     if [ -z "$FILE_DST" ]; then
-        echo -e "Por favor especifique um destino válido para o arquivo!"
+        echo -e "Por favor especifique um destino vÃ¡lido para o arquivo!"
         remove_temp_files
         exit 1
     fi
@@ -282,7 +282,7 @@ list)
 
     #Checking DIR_DST
     if [ -z "$DIR_DST" ]; then
-        echo -e "Por favor especifique um diretório válido do Dropbox!"
+        echo -e "Por favor especifique um diretÃ³rio vÃ¡lido do Dropbox!"
         remove_temp_files
         exit 1
     fi
@@ -309,7 +309,7 @@ case "$COMMAND" in
 
 #        if [ $(stat --format="%s" "$FILE_SRC") -gt 150000000 ]; then
 #            print " > ERRO\n"
-#            print "   Devido a uma limitação na API do Dropbox você não pode fazer Upload de arquivos\n"
+#            print "   Devido a uma limitaÃ§Ã£o na API do Dropbox vocÃª nÃ£o pode fazer Upload de arquivos\n"
 #            print "   maiores que 150Mb.\n"
 #            remove_temp_files
 #            exit 1
@@ -376,7 +376,7 @@ echo 4
     info)
      
         print "Dropbox Uploader v$VERSION\n\n"
-        print " > Requisitando informações... \n"  
+        print " > Requisitando informaÃ§Ãµes... \n"  
         time=$(utime)
         CURL_PARAMETERS="-s --show-error"
         /usr/local/bin/./curl -k  $CURL_PARAMETERS -i -o "$RESPONSE_FILE" --data "oauth_consumer_key=$APPKEY&oauth_token=$OAUTH_ACCESS_TOKEN&oauth_signature_method=PLAINTEXT&oauth_signature=$APPSECRET%26$OAUTH_ACCESS_TOKEN_SECRET&oauth_timestamp=$time&oauth_nonce=$RANDOM" "$API_INFO_URL"
@@ -416,7 +416,7 @@ echo 5
 
     unlink)
 
-        echo -ne "\n Você deseja realmente desvincular este script de sua conta Dropbox? [y/n]"
+        echo -ne "\n VocÃª deseja realmente desvincular este script de sua conta Dropbox? [y/n]"
         read answer
         if [ "$answer" == "y" ]; then
             rm -fr "$CONFIG_FILE"
@@ -490,7 +490,7 @@ echo 7
             
             #It's a file
             else
-                print "ERRO $DIR_DST Nào é um diretório!\n"
+                print "ERRO $DIR_DST NÃ o Ã© um diretÃ³rio!\n"
                 remove_temp_files
                 exit 1
             fi
